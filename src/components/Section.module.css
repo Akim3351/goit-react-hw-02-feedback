@@ -1,0 +1,11 @@
+.wrapper {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.wrapper__title {
+  text-align: center;
+  justify-content: center;
+}
