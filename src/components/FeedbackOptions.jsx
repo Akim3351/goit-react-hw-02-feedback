@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import css from "./FeedbackOptions.module.css";
+import propTypes from "prop-types";
 
 class FeedBackOptions extends Component {
   render() {
@@ -23,5 +24,14 @@ class FeedBackOptions extends Component {
     );
   }
 }
+
+FeedBackOptions.propTypes = {
+  options: propTypes.shape({
+    good: propTypes.number.isRequired,
+    neutral: propTypes.number.isRequired,
+    bad: propTypes.number.isRequired,
+  }),
+  onLeaveFeedback: propTypes.func.isRequired,
+};
 
 export default FeedBackOptions;
