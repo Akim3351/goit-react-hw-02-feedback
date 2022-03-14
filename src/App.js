@@ -1,29 +1,16 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import Section from "./components/Section";
-import FeedBackOptions from "./components/FeedbackOptions";
-import Statistics from "./components/Statistics";
-import Notification from "./components/Notification";
+import Section from "./components/Section/Section";
+import FeedBackOptions from "./components/FeedbackOptions/FeedbackOptions";
+import Statistics from "./components/Statistics/Statistics";
+import Notification from "./components/Notification/Notification";
 
 class App extends Component {
   state = {
     good: 0,
     neutral: 0,
     bad: 0,
-  };
-
-  totalCount = () => {
-    const { good, neutral, bad } = this.state;
-    return good + neutral + bad;
-  };
-
-  positivePercentage = () => {
-    const { good, neutral, bad } = this.state;
-    const positiveFeedback = Number.parseInt(
-      (good / (good + neutral + bad)) * 100
-    );
-    return Number.isNaN(positiveFeedback) ? "0" : `${positiveFeedback} %`;
   };
 
   onLeaveFeedback = (event) => {
@@ -33,6 +20,11 @@ class App extends Component {
         [name]: prevState[name] + 1,
       };
     });
+  };
+
+  totalCount = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
   };
 
   render() {
@@ -54,7 +46,6 @@ class App extends Component {
               neutral={this.state.neutral}
               bad={this.state.bad}
               total={this.totalCount()}
-              positivePercentage={this.positivePercentage()}
             />
           )}
         </Section>

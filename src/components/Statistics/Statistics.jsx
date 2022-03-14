@@ -3,8 +3,16 @@ import propTypes from "prop-types";
 import css from "./Statistics.module.css";
 
 class Statistics extends Component {
+  positivePercentage = () => {
+    const { good, neutral, bad } = this.props;
+    const positiveFeedback = Number.parseInt(
+      (good / (good + neutral + bad)) * 100
+    );
+    return Number.isNaN(positiveFeedback) ? "0" : `${positiveFeedback} %`;
+  };
+
   render() {
-    const { good, neutral, bad, total, positivePercentage } = this.props;
+    const { good, neutral, bad, total } = this.props;
     return (
       <ul className={css.stats__list}>
         <li className={css.stats__item}>Good: {good}</li>
@@ -12,7 +20,7 @@ class Statistics extends Component {
         <li className={css.stats__item}>Bad: {bad}</li>
         <li className={css.stats__item}>Total: {total}</li>
         <li className={css.stats__item}>
-          Positive feedback: {positivePercentage}
+          Positive feedback: {this.positivePercentage()}
         </li>
       </ul>
     );
@@ -24,7 +32,6 @@ Statistics.propTypes = {
   neutral: propTypes.number.isRequired,
   bad: propTypes.number.isRequired,
   total: propTypes.number,
-  positivePercentage: propTypes.string,
 };
 
 export default Statistics;
