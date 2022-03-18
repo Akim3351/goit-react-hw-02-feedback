@@ -5,11 +5,10 @@ import propTypes from "prop-types";
 class FeedBackOptions extends Component {
   render() {
     const { options, onLeaveFeedback } = this.props;
-    const btnNames = Object.keys(options);
 
     return (
       <div className={css.feedback__buttons}>
-        {btnNames.map((btn) => (
+        {options.map((btn) => (
           <button
             type="button"
             key={btn}
@@ -26,11 +25,7 @@ class FeedBackOptions extends Component {
 }
 
 FeedBackOptions.propTypes = {
-  options: propTypes.shape({
-    good: propTypes.number.isRequired,
-    neutral: propTypes.number.isRequired,
-    bad: propTypes.number.isRequired,
-  }),
+  options: propTypes.array.isRequired,
   onLeaveFeedback: propTypes.func.isRequired,
 };
 
