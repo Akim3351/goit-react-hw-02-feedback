@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./App.css";
 
 import Section from "./components/Section/Section";
 import FeedBackOptions from "./components/FeedbackOptions/FeedbackOptions";
@@ -22,9 +21,17 @@ class App extends Component {
     });
   };
 
-  totalCount = () => {
+  countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
     return good + neutral + bad;
+  };
+
+  countPositiveFeedbackPercentage = () => {
+    const { good, neutral, bad } = this.state;
+    const positiveFeedback = Number.parseInt(
+      (good / (good + neutral + bad)) * 100
+    );
+    return Number.isNaN(positiveFeedback) ? "0" : `${positiveFeedback} %`;
   };
 
   render() {
@@ -38,14 +45,17 @@ class App extends Component {
         </Section>
 
         <Section title="Statistics">
-          {this.totalCount() === 0 ? (
+          {this.countTotalFeedback() === 0 ? (
             <Notification message="There is no feedback" />
           ) : (
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}
-              total={this.totalCount()}
+              countPositiveFeedbackPercentage={
+                this.countPositiveFeedbackPercentage
+              }
+              countTotalFeedback={this.countTotalFeedback()}
             />
           )}
         </Section>
